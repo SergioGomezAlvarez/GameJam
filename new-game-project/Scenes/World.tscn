@@ -9,12 +9,24 @@
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 modulate = Color(1, 0.09803922, 0.09411765, 1)
-position = Vector2(575, 324.00003)
-scale = Vector2(1152.5, 649.5)
+position = Vector2(-179, 0)
+scale = Vector2(5976, 4859)
 mesh = SubResource("QuadMesh_o3h3i")
 
 [node name="Box" parent="." instance=ExtResource("1_5cjrv")]
-position = Vector2(136, 130)
+position = Vector2(-117, 70)
+
+[node name="Box" parent="Box" instance=ExtResource("1_5cjrv")]
+position = Vector2(592, -392)
+
+[node name="Box" parent="Box/Box" instance=ExtResource("1_5cjrv")]
+position = Vector2(257, 380)
+
+[node name="Box2" parent="Box/Box" instance=ExtResource("1_5cjrv")]
+position = Vector2(257, 380)
+
+[node name="Box" parent="Box/Box/Box2" instance=ExtResource("1_5cjrv")]
+position = Vector2(257, 380)
 
 [node name="Box2" parent="." instance=ExtResource("1_5cjrv")]
 position = Vector2(175, 66)

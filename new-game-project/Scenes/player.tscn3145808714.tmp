@@ -1,8 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://bo0pwsa6hw5ue"]
 
 [ext_resource type="Script" uid="uid://c3ubxpp10k6x6" path="res://Scripts/player.gd" id="1_v0iea"]
-[ext_resource type="PackedScene" uid="uid://bito406a50tsv" path="res://Scenes/bullet.tscn" id="2_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://gvf3ll1vq8l4" path="res://Sprites/bever character/spritesheet.png" id="2_cvnsp"]
+
+[sub_resource type="PackedScene" id="PackedScene_cvnsp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
 atlas = ExtResource("2_cvnsp")
@@ -42,23 +43,21 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3smsa"]
-radius = 28.0
-height = 56.0
+radius = 8.0
+height = 16.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_v0iea")
-bullet_scene = ExtResource("2_6t5aa")
+Bullet = SubResource("PackedScene_cvnsp")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
-scale = Vector2(3.9166667, 3.473958)
 sprite_frames = SubResource("SpriteFrames_x3wgy")
 frame_progress = 0.53427386
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 13)
+position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_3smsa")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="MuzzleShoot" type="Marker2D" parent="."]
-gizmo_extents = 55.9
+[node name="Muzzle" type="Marker2D" parent="."]
