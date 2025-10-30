@@ -1,17 +1,23 @@
-extends Node2D
+extends CharacterBody2D
 
-enum PlayerState {PLAYING, DEAD }
-
-var state: PlayerState = PlayerState.PLAYING;
-var health: int = 3;
-var speed: int = 400;
+var speed = 300
+@onready var _animated_sprite = $Sprite
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	_animated_sprite.play("default")
+	look_at(get_global_mouse_position())
+
+func _physics_process(delta: float) -> void:
+	
+	var move_dir = Vector2(Input.get_axis("move_left" , "move_right"),
+		Input.get_axis("move_up" , "move_down")
+	)
+	if  move_dir != Vector2.ZERO:
+		velocity = speed * move_dir.normalized()
+	else:
+		velocity.x = move_toward(velocity.x, 0, speed  )
+		velocity.y = move_toward(velocity.y, 0, speed  )
+
+	
+	move_and_slide()
