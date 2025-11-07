@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Pistol" load_steps=3 format=3 uid="uid://cqgixpnkrba2x"]
+
+[ext_resource type="Script" uid="uid://v0u711fkd2lu" path="res://Scripts/ShootingScripts/pistol.gd" id="1_6a4xg"]
+[ext_resource type="PackedScene" uid="uid://ouluty3mlvox" path="res://Scenes/bullet.tscn" id="1_jk5il"]
+
+[resource]
+script = ExtResource("1_6a4xg")
+projectile_scene = ExtResource("1_jk5il")
+metadata/_custom_type_script = "uid://v0u711fkd2lu"
