@@ -1,14 +1,63 @@
 extends CharacterBody2D
 class_name Player
 
-@export var speed := 300.0
+@export var speed := 200.0
+@export var max_hp := 3
+@export var damage_cooldown := 1.0  
+var _next_damage_time := 0.0
+
+var hp: int
+
 @onready var _animated_sprite: AnimatedSprite2D = $Sprite
 @onready var muzzle: Marker2D = $MuzzleShoot
 
-@export var gun: ShootingStrat         
+# --- RANDOM WEAPON SYSTEM ---
+@export var available_weapons: Array[ShootingStrat] = []   # Add your 5 weapons here
+@export var gun: ShootingStrat                              # Current weapon
 @export var fire_action: StringName = "shoot"
+# --------------------------------
 
 var _next_shot_time := 0.0
+
+
+func _ready() -> void:
+	hp = max_hp
+
+	# Give random weapon if none is pre-assigned
+	if gun == null:
+		_pick_random_weapon()
+
+
+func _pick_random_weapon() -> void:
+	if available_weapons.is_empty():
+		push_error("Player has no available_weapons assigned in the inspector!")
+		return
+
+	randomize()
+	var idx := randi() % available_weapons.size()
+	gun = available_weapons[idx]
+
+	print("Player received random weapon:", gun)
+
+
+func take_damage(amount: int) -> void:
+	var now := Time.get_ticks_msec() / 1000.0
+
+	if now < _next_damage_time:
+		return
+
+	hp -= amount
+	print("Player took", amount, "damage. HP:", hp)
+
+	_next_damage_time = now + damage_cooldown
+
+	if hp <= 0:
+		_die()
+
+
+func _die() -> void:
+	print("Player died!")
+	queue_free()
 
 
 func _process(delta: float) -> void:

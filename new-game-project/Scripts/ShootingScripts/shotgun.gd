@@ -1,7 +1,7 @@
 class_name Shotgun
 extends ShootingStrat
 
-@export var pellets := 8
+@export var pellets := 4
 @export var cone_deg := 18.0
 @export var pellet_damage := 5
 @export var pellet_speed_scale := 0.85

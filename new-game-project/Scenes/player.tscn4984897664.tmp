@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://bo0pwsa6hw5ue"]
+
+[ext_resource type="Script" uid="uid://c3ubxpp10k6x6" path="res://Scripts/player.gd" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://bmu80horbkdq5" path="res://Scripts/ShootingScripts/full_auto.gd" id="2_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://gvf3ll1vq8l4" path="res://Sprites/bever character/spritesheet.png" id="2_cvnsp"]
+[ext_resource type="PackedScene" uid="uid://ouluty3mlvox" path="res://Scenes/bullet.tscn" id="2_vgqql"]
+
+[sub_resource type="Resource" id="Resource_vgqql"]
+script = ExtResource("2_6t5aa")
+projectile_scene = ExtResource("2_vgqql")
+metadata/_custom_type_script = "uid://bmu80horbkdq5"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
+atlas = ExtResource("2_cvnsp")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
+atlas = ExtResource("2_cvnsp")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
+atlas = ExtResource("2_cvnsp")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x3wgy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6t5aa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgqql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkybt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgqql")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3smsa"]
+radius = 28.0
+height = 56.0
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_v0iea")
+speed = null
+max_hp = null
+damage_cooldown = null
+gun = SubResource("Resource_vgqql")
+fire_action = null
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3.9166667, 3.473958)
+sprite_frames = SubResource("SpriteFrames_x3wgy")
+frame_progress = 0.53427386
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 13)
+shape = SubResource("CapsuleShape2D_3smsa")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="MuzzleShoot" type="Marker2D" parent="."]
+gizmo_extents = 55.9

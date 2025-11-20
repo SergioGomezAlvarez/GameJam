@@ -1,11 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfw3keu5mmnoa"]
+[gd_scene load_steps=7 format=3 uid="uid://bfw3keu5mmnoa"]
 
 [ext_resource type="PackedScene" uid="uid://cba6yi7feo73x" path="res://Scenes/Wall.tscn" id="1_5cjrv"]
+[ext_resource type="Script" uid="uid://cxdlmlnufqna" path="res://Scripts/world.gd" id="1_gjpho"]
 [ext_resource type="PackedScene" uid="uid://bo0pwsa6hw5ue" path="res://Scenes/player.tscn" id="2_j0p05"]
+[ext_resource type="PackedScene" uid="uid://2oqfqxx5b61g" path="res://enemy.tscn" id="3_5nsto"]
+[ext_resource type="PackedScene" uid="uid://b58wvdyxrq3l0" path="res://Scenes/spawner.tscn" id="5_p70al"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_o3h3i"]
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" node_paths=PackedStringArray("spawn_points", "wall_spawn_points")]
+script = ExtResource("1_gjpho")
+enemy_scene = ExtResource("3_5nsto")
+spawn_points = [NodePath("Spawner/spawnpoint"), NodePath("Spawner/spawnpoint2"), NodePath("Spawner/spawnpoint3")]
+wall_scene = ExtResource("1_5cjrv")
+wall_spawn_points = [NodePath("Spawner/wallspawnpoint")]
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 modulate = Color(1, 0.09803922, 0.09411765, 1)
@@ -31,5 +39,18 @@ position = Vector2(257, 380)
 [node name="Box2" parent="." instance=ExtResource("1_5cjrv")]
 position = Vector2(175, 66)
 
-[node name="Player" parent="." instance=ExtResource("2_j0p05")]
+[node name="player" parent="." instance=ExtResource("2_j0p05")]
 position = Vector2(77, 58)
+
+[node name="Spawner" parent="." instance=ExtResource("5_p70al")]
+
+[node name="spawnpoint" type="Marker2D" parent="Spawner"]
+
+[node name="spawnpoint2" type="Marker2D" parent="Spawner"]
+
+[node name="spawnpoint3" type="Marker2D" parent="Spawner"]
+
+[node name="wallspawnpoint" type="Marker2D" parent="Spawner"]
+
+[node name="Enemy" parent="." instance=ExtResource("3_5nsto")]
+position = Vector2(64, 215)

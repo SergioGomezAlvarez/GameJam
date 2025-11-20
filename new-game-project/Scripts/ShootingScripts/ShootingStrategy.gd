@@ -3,9 +3,10 @@ extends Resource
 
 @export var projectile_scene: PackedScene
 @export var projectile_speed: float = 900.0
-@export var damage: int = 10
-@export var cooldown_sec: float = 0.2
+@export var damage: int = 1
+@export var cooldown_sec: float = 0.5
 @export var spread_deg: float = 0.0
+
 
 func fire(weapon: Node2D, muzzle: Node2D, aim_dir: Vector2) -> void:
 	if not projectile_scene:

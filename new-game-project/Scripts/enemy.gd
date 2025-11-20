@@ -1,29 +1,58 @@
 extends CharacterBody2D
+class_name Enemy
 
 @export var move_speed: float = 100.0
+@export var stop_distance: float = 20.0
 
-var target: Node2D = null
+@export var max_hp := 5
+var hp: int
+
+var target: Node2D
 
 func _ready() -> void:
-	# Find the first node in the "player" group
-	target = get_tree().get_first_node_in_group("player") as Node2D
+	# Enemy and player are siblings under World
+	hp = max_hp
+	target = get_parent().get_node("player") as Node2D
+	if target == null:
+		push_error("Player node not found as sibling!")
+
 
 func _physics_process(delta: float) -> void:
 	if target == null:
 		return
 
-	# Direction from enemy to player
-	var dir: Vector2 = (target.global_position - global_position)
+	var dir: Vector2 = target.global_position - global_position
+	var distance := dir.length()
 
-	if dir.length() > 1.0:
+	if distance > stop_distance:
 		dir = dir.normalized()
+		velocity = dir * move_speed
 	else:
-		dir = Vector2.ZERO
+		velocity = Vector2.ZERO
 
-	# Move towards the player
-	velocity = dir * move_speed
 	move_and_slide()
+	_check_player_collision()
 
-	# Optional: rotate enemy to face the player
-	if dir != Vector2.ZERO:
+	if dir.length() > 0.01:
 		rotation = dir.angle()
+
+
+func _check_player_collision() -> void:
+	for i in get_slide_collision_count():
+		var collision := get_slide_collision(i)
+		var other := collision.get_collider()
+
+		if other is Player:
+			(other as Player).take_damage(1)
+			
+
+func take_damage(amount: int) -> void:
+	hp -= amount
+	print("Enemy took", amount, "damage. HP:", hp)
+
+	if hp <= 0:
+		_die()
+
+func _die() -> void:
+	print("Enemy died!")
+	queue_free()			
