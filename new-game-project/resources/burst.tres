@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ShootingStrat" load_steps=3 format=3 uid="uid://dfucdgdtciaxk"]
+
+[ext_resource type="PackedScene" uid="uid://ouluty3mlvox" path="res://Scenes/bullet.tscn" id="1_4y2ql"]
+[ext_resource type="Script" uid="uid://cpqouym3b7knm" path="res://Scripts/ShootingScripts/ShootingStrategy.gd" id="1_7dsdq"]
+
+[resource]
+script = ExtResource("1_7dsdq")
+projectile_scene = ExtResource("1_4y2ql")
+metadata/_custom_type_script = "uid://cpqouym3b7knm"

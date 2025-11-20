@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://2oqfqxx5b61g"]
+
+[ext_resource type="Script" uid="uid://bmj2amobm34wx" path="res://Scripts/enemy.gd" id="1_7k104"]
+[ext_resource type="Texture2D" uid="uid://du255r4movaww" path="res://Sprites/crab enemy/tile_0110.png" id="2_4gyqm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qi2p4"]
+size = Vector2(50, 36)
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_7k104")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3.125, 2.25)
+texture = ExtResource("2_4gyqm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qi2p4")
