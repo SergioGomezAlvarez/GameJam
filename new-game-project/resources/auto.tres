@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AutoRifle" load_steps=3 format=3 uid="uid://bmiifbob0fdqw"]
+
+[ext_resource type="Script" uid="uid://bmu80horbkdq5" path="res://Scripts/ShootingScripts/full_auto.gd" id="1_ck2vt"]
+[ext_resource type="PackedScene" uid="uid://ouluty3mlvox" path="res://Scenes/bullet.tscn" id="1_w2apq"]
+
+[resource]
+script = ExtResource("1_ck2vt")
+projectile_scene = ExtResource("1_w2apq")
+metadata/_custom_type_script = "uid://bmu80horbkdq5"

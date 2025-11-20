@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ShootingStrat" load_steps=2 format=3 uid="uid://c5jxmhsuy6oir"]
+
+[ext_resource type="Script" uid="uid://cpqouym3b7knm" path="res://Scripts/ShootingScripts/ShootingStrategy.gd" id="1_36llo"]
+
+[resource]
+script = ExtResource("1_36llo")
+metadata/_custom_type_script = "uid://cpqouym3b7knm"

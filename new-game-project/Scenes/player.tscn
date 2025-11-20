@@ -1,7 +1,41 @@
-[gd_scene load_steps=8 format=3 uid="uid://bo0pwsa6hw5ue"]
+[gd_scene load_steps=20 format=3 uid="uid://bo0pwsa6hw5ue"]
 
 [ext_resource type="Script" uid="uid://c3ubxpp10k6x6" path="res://Scripts/player.gd" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://cpqouym3b7knm" path="res://Scripts/ShootingScripts/ShootingStrategy.gd" id="2_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://gvf3ll1vq8l4" path="res://Sprites/bever character/spritesheet.png" id="2_cvnsp"]
+[ext_resource type="PackedScene" uid="uid://ouluty3mlvox" path="res://Scenes/bullet.tscn" id="2_vgqql"]
+[ext_resource type="Script" uid="uid://bmu80horbkdq5" path="res://Scripts/ShootingScripts/full_auto.gd" id="3_8erm5"]
+[ext_resource type="Script" uid="uid://dk5x7qdjlbfrb" path="res://Scripts/ShootingScripts/shotgun.gd" id="3_fkybt"]
+[ext_resource type="Script" uid="uid://dth0vjw5g0s6t" path="res://Scripts/ShootingScripts/burst.gd" id="3_vgqql"]
+[ext_resource type="Script" uid="uid://blg7ebfmhhbuq" path="res://Scripts/ShootingScripts/spray.gd" id="5_f1ek2"]
+[ext_resource type="Script" uid="uid://v0u711fkd2lu" path="res://Scripts/ShootingScripts/pistol.gd" id="6_tx1dd"]
+
+[sub_resource type="Resource" id="Resource_gymyn"]
+script = ExtResource("3_8erm5")
+projectile_scene = ExtResource("2_vgqql")
+metadata/_custom_type_script = "uid://bmu80horbkdq5"
+
+[sub_resource type="Resource" id="Resource_pu2lt"]
+script = ExtResource("3_vgqql")
+projectile_scene = ExtResource("2_vgqql")
+metadata/_custom_type_script = "uid://dth0vjw5g0s6t"
+
+[sub_resource type="Resource" id="Resource_ukyrk"]
+script = ExtResource("5_f1ek2")
+projectile_scene = ExtResource("2_vgqql")
+metadata/_custom_type_script = "uid://blg7ebfmhhbuq"
+
+[sub_resource type="Resource" id="Resource_7dp3o"]
+script = ExtResource("6_tx1dd")
+projectile_scene = ExtResource("2_vgqql")
+damage = 3
+metadata/_custom_type_script = "uid://v0u711fkd2lu"
+
+[sub_resource type="Resource" id="Resource_h4iuc"]
+script = ExtResource("3_fkybt")
+pellet_damage = 1
+projectile_scene = ExtResource("2_vgqql")
+metadata/_custom_type_script = "uid://dk5x7qdjlbfrb"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
 atlas = ExtResource("2_cvnsp")
@@ -41,16 +75,23 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3smsa"]
-radius = 8.0
-height = 16.0
+radius = 28.0
+height = 56.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D"]
 script = ExtResource("1_v0iea")
+available_weapons = Array[ExtResource("2_6t5aa")]([SubResource("Resource_gymyn"), SubResource("Resource_pu2lt"), SubResource("Resource_ukyrk"), SubResource("Resource_7dp3o"), SubResource("Resource_h4iuc")])
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3.9166667, 3.473958)
 sprite_frames = SubResource("SpriteFrames_x3wgy")
 frame_progress = 0.53427386
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
+position = Vector2(-1, 13)
 shape = SubResource("CapsuleShape2D_3smsa")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="MuzzleShoot" type="Marker2D" parent="."]
+gizmo_extents = 55.9
