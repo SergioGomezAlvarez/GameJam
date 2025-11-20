@@ -1,8 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://bo0pwsa6hw5ue"]
+[gd_scene load_steps=11 format=3 uid="uid://bo0pwsa6hw5ue"]
 
 [ext_resource type="Script" uid="uid://c3ubxpp10k6x6" path="res://Scripts/player.gd" id="1_v0iea"]
-[ext_resource type="Resource" uid="uid://dep6hmpemi0h" path="res://resources/shotgun.tres" id="2_6t5aa"]
+[ext_resource type="Script" uid="uid://bmu80horbkdq5" path="res://Scripts/ShootingScripts/full_auto.gd" id="2_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://gvf3ll1vq8l4" path="res://Sprites/bever character/spritesheet.png" id="2_cvnsp"]
+[ext_resource type="PackedScene" uid="uid://ouluty3mlvox" path="res://Scenes/bullet.tscn" id="2_vgqql"]
+
+[sub_resource type="Resource" id="Resource_6t5aa"]
+script = ExtResource("2_6t5aa")
+projectile_scene = ExtResource("2_vgqql")
+metadata/_custom_type_script = "uid://bmu80horbkdq5"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
 atlas = ExtResource("2_cvnsp")
@@ -47,7 +53,7 @@ height = 56.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_v0iea")
-gun = ExtResource("2_6t5aa")
+gun = SubResource("Resource_6t5aa")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3.9166667, 3.473958)
